@@ -1,0 +1,16 @@
+name: Keep Backend Alive
+
+on:
+  schedule:
+    # Runs every 10 minutes
+    - cron: "*/10 * * * *"
+  workflow_dispatch: # Allows manual trigger for testing
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Backend
+        run: |
+          # Replace the URL below if your production URL is different
+          curl -f "https://mediai-backend.onrender.com/api/public/ping" || echo "Ping failed, but continuing..."
